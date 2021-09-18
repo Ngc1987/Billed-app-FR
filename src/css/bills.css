@@ -56,10 +56,12 @@
 
 .icon-actions {
   display: flex;
+  flex-direction: row;
   -webkit-box-pack: justify;
   -webkit-justify-content: space-around;
   -ms-flex-pack: justify;
-  justify-content: space-around;
+  justify-content: space-between;
+  width: 50px;
   align-items: center;
 }
 

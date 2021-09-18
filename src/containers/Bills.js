@@ -1,5 +1,5 @@
 import { ROUTES_PATH } from '../constants/routes.js'
-import { formatDate, formatStatus } from "../app/format.js"
+import { formatDate, formatStatus, humanizeDate } from "../app/format.js"
 import Logout from "./Logout.js"
 
 export default class {
@@ -28,6 +28,7 @@ export default class {
   }
 
   // not need to cover this function by tests
+  /* istanbul ignore next */
   getBills = () => {
     const userEmail = localStorage.getItem('user') ?
       JSON.parse(localStorage.getItem('user')).email : ""
@@ -37,26 +38,36 @@ export default class {
       .get()
       .then(snapshot => {
         const bills = snapshot.docs
-          .map(doc => {
-            try {
-              return {
-                ...doc.data(),
-                date: formatDate(doc.data().date),
-                status: formatStatus(doc.data().status)
-              }
-            } catch(e) {
-              // if for some reason, corrupted data was introduced, we manage here failing formatDate function
-              // log the error and return unformatted date in that case
-              console.log(e,'for',doc.data())
-              return {
-                ...doc.data(),
-                date: doc.data().date,
-                status: formatStatus(doc.data().status)
-              }
+        .map(doc => doc.data())
+        .map(doc => {
+          try {
+            return {
+              ...doc,
+              date: formatDate(doc.date),
+              status: formatStatus(doc.status)
             }
-          })
-          .filter(bill => bill.email === userEmail)
-          console.log('length', bills.length)
+          } catch(e) {
+            // if for some reason, corrupted data was introduced, we manage here failing formatDate function
+            // log the error and return unformatted date in that case
+            console.log(e,'for',doc.data())
+            return {
+              ...doc,
+              date: doc.date,
+              status: formatStatus(doc.status)
+            }
+          }
+        })
+        .filter(bill => bill.email === userEmail)
+        .sort(function(a, b) {
+          return new Date(a.date).getTime() - new Date(b.date).getTime()
+        })
+        .map(doc => {
+          return {
+            ...doc,
+            date: humanizeDate(doc.date),
+          }
+        })
+        console.log('length', bills.length)
         return bills
       })
       .catch(error => error)

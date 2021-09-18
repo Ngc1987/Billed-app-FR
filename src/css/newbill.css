@@ -61,3 +61,12 @@ textarea:focus, input:focus, select:focus {
 *[placeholder] {
   color: #0E5AE5 !important;
 }
+
+#error {
+  display: none;
+  justify-content: center;
+  font-size: 0.8rem;
+  text-align: center;
+  margin-top: 10px;
+  color: red;
+}

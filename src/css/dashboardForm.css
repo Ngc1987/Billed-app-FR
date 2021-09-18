@@ -77,8 +77,12 @@
 
 #icon-download-d {
   cursor: pointer;
+  margin-top: 5px;
 }
 
 #file-name-admin {
-  max-width: 300px;
+  max-width: 70%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }

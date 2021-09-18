@@ -2,8 +2,13 @@
 import { ROUTES_PATH } from '../constants/routes.js'
 import Logout from "./Logout.js"
 
+
+
+
 export default class NewBill {
   constructor({ document, onNavigate, firestore, localStorage }) {
+
+    
     this.document = document
     this.onNavigate = onNavigate
     this.firestore = firestore
@@ -14,20 +19,44 @@ export default class NewBill {
     this.fileUrl = null
     this.fileName = null
     new Logout({ document, localStorage, onNavigate })
+
+
   }
   handleChangeFile = e => {
     const file = this.document.querySelector(`input[data-testid="file"]`).files[0]
     const filePath = e.target.value.split(/\\/g)
+
     const fileName = filePath[filePath.length-1]
-    this.firestore
-      .storage
-      .ref(`justificatifs/${fileName}`)
-      .put(file)
-      .then(snapshot => snapshot.ref.getDownloadURL())
-      .then(url => {
-        this.fileUrl = url
-        this.fileName = fileName
-      })
+
+    const errorMsg = this.document.querySelector("#error")
+    const fileInput = this.document.querySelector("#onlyImage")
+   
+
+
+    function validFileOrNot(fileName) {
+      if(fileName.includes(".jpg") || fileName.includes(".jpeg") || fileName.includes(".png")) {
+        /* istanbul ignore next */
+        errorMsg.style.display = "none"
+        /* istanbul ignore next */
+          this.firestore
+            .storage
+            .ref(`justificatifs/${fileName}`)
+            .put(file)
+            .then(snapshot => snapshot.ref.getDownloadURL())
+            .then(url => {
+              this.fileUrl = url
+              this.fileName = fileName
+            })
+
+      } else {
+        errorMsg.style.display = "flex"
+        fileInput.value = ""
+      }
+    }
+
+    validFileOrNot(fileName)
+    
+
   }
   handleSubmit = e => {
     e.preventDefault()
@@ -51,6 +80,7 @@ export default class NewBill {
   }
 
   // not need to cover this function by tests
+  /* istanbul ignore next */
   createBill = (bill) => {
     if (this.firestore) {
       this.firestore
