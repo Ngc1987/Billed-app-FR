@@ -15,3 +15,8 @@ export const localStorageMock = (function() {
     }
   }
 })()
+
+export function setLocalStorage (user) {
+  Object.defineProperty(window, 'localStorage', { value: localStorageMock })
+  window.localStorage.setItem('user', JSON.stringify({ type: user, email: 'test@email.com' }))
+}
