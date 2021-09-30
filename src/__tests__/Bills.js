@@ -20,6 +20,8 @@ describe("Given I am connected as an employee", () => {
       const antiChrono = (a, b) => ((a.date < b.date) ? -1 : 1)
       const antiChrono2 = (a,b) => (new Date(a).getTime() - new Date(b).getTime()) 
       const datesSorted = [...dates].sort(antiChrono2)
+      console.log(dates)
+      console.log(datesSorted)
       expect(dates).not.toEqual(datesSorted)
     })
   })
@@ -66,12 +68,7 @@ describe("Given I am a user connected as Employee", () => {
        expect(bills.data.length).toBeGreaterThanOrEqual(1)
        console.log(bills.data)
     })
-    // test("it should show some bills", () => {
-    //   const billsParts = screen.getAllByTestId("bill")
-    //   console.log(billsParts)
-    //   expect(billsParts).toBeInTheDocument()
-    //   // expect(billsParts)
-    // })
+    
     test("fetches bills from an API and fails with 404 message error", async () => {
       firebase.get.mockImplementationOnce(() =>
         Promise.reject(new Error("Erreur 404"))

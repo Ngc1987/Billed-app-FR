@@ -16,7 +16,6 @@ const onNavigate = (pathname) => {
 setLocalStorage('Employee')
 Object.defineProperty(window, "location", { value: { hash: "#employee/bill/new" } })
 
-// beforeEach(document.body.innerHTML = NewBillUI())
 
 
 describe("Given I am connected as an employee", () => {
@@ -102,21 +101,8 @@ describe("Given I am connected as an employee", () => {
         // expect(screen.getByText('Mes notes de frais')).toBeTruthy()
         await waitFor(() => {
           expect(screen.getByText("Mes notes de frais").classList.contains("content-title")).toBe(true)
-
         })
-        // Rajout de l'arrivée sur la page suivante
-        // Faire le mock du local storage
-        // Test si erreur d'affichage des bills
       })
-      // test("Then it should render Bills page", () => {
-      //   document.body.innerHTML = BillsUI({
-      //     data: [],
-      //     loading: false,
-      //     error: false
-      //   })
-      //   // console.log(screen.getByText('Mes notes de frais'))
-      //   expect(screen.getByText('Mes notes de frais')).toBeTruthy()
-      // })
     })
   })
     
@@ -169,80 +155,4 @@ describe("Given I am a user connected as Employee", () => {
   })
 })
 
-
-
-
-
-
-// describe("Given I am connected as an employee", () => {
-//   describe("When I am on NewBill Page", () => {
-//     test("Then verify we have the title of page", () => {
-//       const html = NewBillUI()
-//       document.body.innerHTML = html
-//       //to-do write assertion
-//       const newBillPage = screen.getByText("Envoyer une note de frais")
-//       console.log(newBillPage)
-//       expect(newBillPage).toHaveClass("content-title")
-//     })
-//     test("Then the newBill page should be rendered", () => {
-//       document.body.innerHTML = NewBillUI()
-//       expect(screen.getAllByText("Envoyer une note de frais")).toBeTruthy()
-//     })
-//     // test("Then a form with nine fields should be rendered", () => {
-//     //   document.body.innerHTML = NewBillUI()
-//     //   const form = document.querySelector("form")
-//     //   expect(form.length).toEqual(9)
-//     // })
-  
-//     // test("it should throw an error message if the charged file isn't at the good format, jpg jpeg or png", () => {
-
-//     // })
-
-
-//     test("Then verify validate the form when something is incorrect", async () => {
-
-//       const html = NewBillUI()
-//       document.body.innerHTML = html
-//       const submitButton = screen.getByText("Envoyer")
-//       fireEvent.submit(submitButton)
-
-//       await waitFor(() => {
-//         const newBillPage = screen.getByText("Envoyer une note de frais")
-//         expect(newBillPage).toHaveClass("content-title")
-//       }) 
-//     })
-
-//     test("Then validate form and redirect on home employee page", async () => {
-//       const html = NewBillUI()
-//       document.body.innerHTML = html
-
-//       let dateElement = screen.getByTestId("datepicker")
-//       let amount = screen.getByTestId("amount")
-//       let percents = screen.getByTestId("pct")
-
-//       dateElement.value = "31/12/2021"
-//       amount.value = "59"
-//       percents.value = "20"
-
-//       const str = JSON.stringify([{ name: 'teresa teng' }]);
-//       const blob = new Blob([str]);
-//       const file = new File([blob], 'values.json', {
-//         type: 'application/JSON',
-//         });
-//       File.prototype.text = jest.fn().mockResolvedValueOnce(str);
-//       const input = screen.getByTestId('file');
-//       user.upload(input, file);
-//       const submitButton = screen.getByText("Envoyer")
-//       fireEvent.submit(submitButton)
-
-//       await waitFor(() => {
-//         const newBillPage = screen.getByText("Envoyer une note de frais")
-//         expect(newBillPage).toHaveClass("content-title")
-//       }) 
-
-//     })  
-
-//   })
-  
-// })
 

@@ -25,15 +25,12 @@ export default class NewBill {
   handleChangeFile = e => {
     const file = this.document.querySelector(`input[data-testid="file"]`).files[0]
     const filePath = e.target.value.split(/\\/g)
-
     const fileName = filePath[filePath.length-1]
-
     const errorMsg = this.document.querySelector("#error")
     const fileInput = this.document.querySelector("#onlyImage")
    
 
 
-    function validFileOrNot(fileName) {
       if(fileName.includes(".jpg") || fileName.includes(".jpeg") || fileName.includes(".png")) {
         /* istanbul ignore next */
         errorMsg.style.display = "none"
@@ -52,11 +49,6 @@ export default class NewBill {
         errorMsg.style.display = "flex"
         fileInput.value = ""
       }
-    }
-
-    validFileOrNot(fileName)
-    
-
   }
   handleSubmit = e => {
     e.preventDefault()

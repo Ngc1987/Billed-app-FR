@@ -97,6 +97,9 @@ export default class {
       $('.vertical-navbar').css({ height: '150vh' })
       this.counter ++
     }
+    $('#icon-eye-d').click(this.handleClickIconEye)
+    $('#btn-accept-bill').click((e) => this.handleAcceptSubmit(e, bill))
+    $('#btn-refuse-bill').click((e) => this.handleRefuseSubmit(e, bill))
     //  else {
     //   $(`#open-bill${bill.id}`).css({ background: '#0D5AE5' })
 
@@ -106,9 +109,6 @@ export default class {
     //   $('.vertical-navbar').css({ height: '120vh' })
     //   this.counter ++
     // }
-    $('#icon-eye-d').click(this.handleClickIconEye)
-    $('#btn-accept-bill').click((e) => this.handleAcceptSubmit(e, bill))
-    $('#btn-refuse-bill').click((e) => this.handleRefuseSubmit(e, bill))
   }
 
   handleAcceptSubmit = (e, bill) => {
