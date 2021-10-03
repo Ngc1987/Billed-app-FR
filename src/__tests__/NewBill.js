@@ -138,7 +138,9 @@ describe("Given I am a user connected as Employee", () => {
       firebase.post.mockImplementationOnce(() =>
         Promise.reject(new Error("Erreur 404"))
       )
-      const html = BillsUI({ error: "Erreur 404" })
+      const html = BillsUI({ 
+         loading: false,
+         error: "Erreur 404" })
       document.body.innerHTML = html
       const message = await screen.getByText(/Erreur 404/)
       expect(message).toBeTruthy()
@@ -147,7 +149,9 @@ describe("Given I am a user connected as Employee", () => {
       firebase.post.mockImplementationOnce(() =>
         Promise.reject(new Error("Erreur 500"))
       )
-      const html = BillsUI({ error: "Erreur 500" })
+      const html = BillsUI({ 
+        loading: false,
+        error: "Erreur 500" })
       document.body.innerHTML = html
       const message = await screen.getByText(/Erreur 500/)
       expect(message).toBeTruthy()
