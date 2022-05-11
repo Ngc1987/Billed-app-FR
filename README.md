@@ -1,3 +1,6 @@
+# Billed App
+Correction de bugs d'affichage, suivis de mise en place de tests unitaires sous Jest
+
 **Comment lancer l'application en local** :
 
 Clonez le projet :
